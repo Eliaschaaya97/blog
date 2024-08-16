@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div id="blogpage">    
+    <div id="blogtitle"> </div>
+    <div class="blogcontent"> </div>
+</div>
+
+<script>
+    const blog = {{ blog|json_encode|raw }};
+    const blogContents = {{ blogcontent|json_encode|raw }};
+
+    function populateBlogPage(blog) {
+        document.getElementById("blogtitle").innerHTML = `
+            <img src="${blog.img}" alt="${blog.title}" style="width:100%; height:auto;" />
+            <h1>${blog.title}</h1>
+            <p>${blog.date}</p>
+            <p>${blog.author}</p>
+        `;
+
+        // Clear previous content
+        const blogContentContainer = document.querySelector(".blogcontent");
+        blogContentContainer.innerHTML = '';
+
+        // Iterate over blogContents array and append each blog content
+        blogContents.forEach(content => {
+            const contentElement = document.createElement('div');
+            contentElement.classList.add('blog-post-content');
+            contentElement.innerHTML = `
+                <h2>${content.title}</h2>
+                <p>${content.content}</p>
+            `;
+            blogContentContainer.appendChild(contentElement);
+        });
+    }
+
+    // Populate the blog content when the page loads
+    document.addEventListener('DOMContentLoaded', () => {
+        populateBlogPage(blog);
+    });
+</script>
+{% endblock %}

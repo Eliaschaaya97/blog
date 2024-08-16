@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<script>
+	const blogs = {{ blogs|json_encode|raw }};
+    
+	function filterBlogs(category) {
+	    const blogContent = document.getElementById('blog-content');
+    
+	    const filteredBlogs = category === 'all'
+		? blogs
+		: blogs.filter(blog => blog.category === category);
+    
+	    blogContent.innerHTML = '';
+    
+	    filteredBlogs.forEach(blog => {
+		const blogElement = document.createElement('div');
+		blogElement.classList.add('blog-post');
+		
+		blogElement.onclick = () => {
+		    window.location.href = `/blog/${blog.id}`;
+		};
+    
+		blogElement.innerHTML = `
+		    <h2>${blog.title}</h2>
+		    <img src="${blog.img}" alt="${blog.title}" style="width:100%; height:auto;"/>
+		    <span>${blog.date}</span>
+		    <p>${blog.content}</p>
+		`;
+		blogContent.appendChild(blogElement);
+	    });
+	}
+    
+	document.addEventListener('DOMContentLoaded', () => {
+	    filterBlogs('all');
+	});
+</script>
+
+<div class="container">
+    <header>
+        <h1>Suyool's Blog</h1>
+    </header>
+
+    <div class="button-container"> 
+        <button onclick="filterBlogs('all')">All</button>
+        <button onclick="filterBlogs('category1')">Category 1</button>
+        <button onclick="filterBlogs('category2')">Category 2</button>
+        <button onclick="filterBlogs('category3')">Category 3</button>
+        <button onclick="filterBlogs('category4')">Category 4</button>
+    </div>
+
+    <main>
+        <div id="blog-content">
+        </div>
+    </main>
+
+
+</div>
+
+{% endblock %}
