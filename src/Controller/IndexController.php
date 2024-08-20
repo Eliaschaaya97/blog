@@ -26,12 +26,13 @@ class IndexController extends AbstractController
 			['title' => 'Blog Post 4', 'content' => 'Content for blog post 2', 'category' => 'category4'],
 
 		];
+
 		return $this->render('index/index.html.twig', [
 			'blogs' => $blogs,
 		]);
 	}
 
-	#[Route('/blog/{id}', name: 'app_block')]
+	#[Route('/blog/{id}', name: 'app_blog')]
 	public function blog($id): Response
 	{
 		$blogtitle = [
