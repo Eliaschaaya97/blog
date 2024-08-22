@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div id="blogpage">
+		<div id="blogtitle">
+			<div class="blogtitle-content">
+
+			</div>
+		</div>
+		<div class="blogcontentTitle">
+	</div>
+<div class="blogcontent"></div>
+	
+	</div>
+
+	<script>
+		// Use JSON to safely pass the blog data to the script
+		const blog = {{ blog|json_encode|raw }};
+
+		function populateBlogPage(blog) {
+			document.getElementById("blogtitle").style.backgroundImage = `url('${blog.image}')`;
+
+			const blogcontentTitle = document.querySelector(".blogcontentTitle");
+			blogcontentTitle.innerHTML = `
+				<div class="blogcontentTitle-content">
+					<span>${blog.title}</span>
+					<div class='dategap'>
+						 <div class='categoryAndDate'> <span>${blog.category}</span><span>${blog.created}</span> </div>
+						<span>${blog.author}</span>
+					</div>
+				</div>
+			`;
+
+			const blogContentContainer = document.querySelector(".blogcontent");
+			console.log(blogContentContainer)
+			blogContentContainer.innerHTML = blog.description;
+		}
+
+		document.addEventListener('DOMContentLoaded', () => {
+			populateBlogPage(blog);
+		});
+	</script>
+{% endblock %}
+
