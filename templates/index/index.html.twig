@@ -24,10 +24,12 @@
 		};
     
 		blogElement.innerHTML = `
-		<img src="${blog.image}" alt="${blog.title}" style="width:100%; height:auto;"/>
-		<span>${blog.categoryid}</span>
-		    <h2>${blog.title}</h2>
-		    <span>${blog.created}</span>
+		<img class="img-blog" src="${blog.image}" alt="${blog.title}"/>
+		<div class="body-blog">
+		<span class="blog-category">${blog.categoryid}</span>
+		    <h2 class="blog-title">${blog.title}</h2>
+		    <span class="blog-created>${blog.created}</span>
+			</div>
 		`;
 		blogContent.appendChild(blogElement);
 	    });
