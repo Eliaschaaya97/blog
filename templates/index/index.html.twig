@@ -8,10 +8,10 @@
     
 	function filterBlogs(category) {
 	    const blogContent = document.getElementById('blog-content');
-    
+
 	    const filteredBlogs = category === 'all'
 		? blogs
-		: blogs.filter(blog => blog.category === category);
+		: blogs.filter(blog => blog.categoryid === category);
     
 	    blogContent.innerHTML = '';
     
@@ -51,7 +51,7 @@
 
     <div class="button-container"> 
         <button onclick="filterBlogs('all')">All</button>
-        <button onclick="filterBlogs('1')">Category 1</button>
+        <button onclick="filterBlogs('politics')">Politics</button>
         <button onclick="filterBlogs('2')">Category 2</button>
         <button onclick="filterBlogs('3')">Category 3</button>
         <button onclick="filterBlogs('4')">Category 4</button>
