@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 20px;
   display: flex;
@@ -31,7 +31,8 @@ body {
       color: #3c739b;
       margin-top: 4rem;
       font-family: $Regular;
-	  font-size: 50px;
+      font-size: 50px;
+      margin-bottom: 20px;
     }
   }
 
@@ -42,6 +43,7 @@ body {
     gap: 31px;
     overflow-x: auto;
     padding-bottom: 10px;
+    scrollbar-width: none;
 
     // &::-webkit-scrollbar {
     //   display: none;
@@ -50,38 +52,49 @@ body {
     button {
       flex-shrink: 0;
       border-radius: 50px;
-      padding: 10px 20px;
+      width: 135px;
+      height: 35px;
       cursor: pointer;
       border: none;
-      font-family: Arial, sans-serif;
       text-align: center;
       background-color: #e8e8ee;
       color: #505a63;
       font-family: $Medium;
-	  font-size: 15px;
+      font-size: 15px;
+    }
+    .button-active {
+      background-color: #f5f6fd;
+      flex-shrink: 0;
+      border-radius: 50px;
+      cursor: pointer;
+      border: none;
+      text-align: center;
+      color: #505a63;
+      font-family: $Medium;
+      font-size: 15px;
+      width: 135px;
+      height: 35px;
     }
   }
 
   main {
     width: 100%;
-    padding: 20px;
     margin-top: 20px;
-    .show-more-button{
+    .show-more-button {
       border: none;
       text-align: center;
       width: 100%;
-      background: none;   
+      background: none;
       font-family: $Medium;
-      font-size: 17px;
-      }
+      font-size: 19px;
+    }
 
     #blog-content {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 2rem;
 
-  
       .blog-post {
         background: #f7f7f7;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -92,7 +105,7 @@ body {
         border-radius: 24px;
         width: 100%;
         height: 500px;
- 
+
         // Adding this media query for responsiveness
         @media (max-width: 768px) {
           flex: 1 1 calc(100% - 1rem); // Cards take full width on smaller screens
@@ -101,41 +114,36 @@ body {
         @media (min-width: 769px) and (max-width: 1024px) {
           flex: 1 1 calc(48% - 1rem); // Cards take half width on medium screens
         }
-		.img-blog{
-			width: 100%;
-           height: 280px;
-         background: #3C739B7C ;
-        border-radius: 26px;
-            opacity: 1;
-            object-fit: cover;
-
-		}
-		.body-blog{
-			padding: 20px;
-			.blog-category{
-				font-size: 17px;
-				font-family: $Medium;
-
-			}
-			.blog-title{
-				font-size: 25px;
-				font-family: $Medium;
-
-			}
-			.blog-created{
-				font-size: 16px;
-				font-family: $Regular;
-
-			}
-		}
+        .img-blog {
+          width: 100%;
+          height: 280px;
+          background: #3c739b7c;
+          border-radius: 26px;
+          opacity: 1;
+          object-fit: cover;
+        }
+        .body-blog {
+          padding: 20px;
+          .blog-category {
+            font-size: 17px;
+            font-family: $Medium;
+          }
+          .blog-title {
+            font-size: 25px;
+            font-family: $Medium;
+          }
+          .blog-created {
+            font-size: 16px;
+            font-family: $Regular;
+          }
+        }
       }
-      .blog-post:nth-child(-n+4) {
+      .blog-post:nth-child(-n + 4) {
         width: calc(48% - 1rem); /* 48% width for two items per row */
       }
-      .blog-post:nth-child(n+5) {
+      .blog-post:nth-child(n + 5) {
         width: calc(32% - 1rem); /* 32% width for three items per row */
       }
-      
     }
   }
 }
@@ -168,30 +176,24 @@ body {
     display: flex;
     flex-direction: column;
     padding: 3rem 5rem;
-	.blogcontentTitle-content{
-		.blog-title{
-			font-size: 25px;
-			font-family: $Bold;
-
-		}
-		.dategap{
-			.categoryAndDate{
-				color: #505A63;
-				font-family: $InterRegular;
-				font-size: 15px;
-
-			}
-			.author-blog{
-				color: #426E97;
-				font-family: $InterRegular;
-				font-size: 15px;
-
-			}
-
-
-		}
-
-	}
+    .blogcontentTitle-content {
+      .blog-title {
+        font-size: 25px;
+        font-family: $Bold;
+      }
+      .dategap {
+        .categoryAndDate {
+          color: #505a63;
+          font-family: $InterRegular;
+          font-size: 15px;
+        }
+        .author-blog {
+          color: #426e97;
+          font-family: $InterRegular;
+          font-size: 15px;
+        }
+      }
+    }
     .dategap {
       margin: 2rem 0;
       display: flex;
@@ -203,7 +205,6 @@ body {
         padding-bottom: 5px;
       }
     }
-
   }
   .blogcontent {
     //     padding: 20px;
@@ -212,11 +213,11 @@ body {
     flex-direction: column;
     align-items: flex-start;
     padding: 0rem 5rem;
-	p{
-		color: #191C1F;;
-		font-family: $Regular;
-		font-size: 18px;
-	}
+    p {
+      color: #191c1f;
+      font-family: $Regular;
+      font-size: 18px;
+    }
 
     .blog-post-content {
       margin-bottom: 20px;
@@ -228,7 +229,6 @@ body {
 
       p {
         font-size: 1rem;
-		
       }
     }
   }

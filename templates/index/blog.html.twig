@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+      <div class="white-navbar container-fluid">
+            {% include 'elements/header-v2.html.twig'%}
+        </div>
 	<div id="blogpage">
 		<div id="blogtitle">
 			<div class="blogtitle-content">
@@ -40,5 +43,7 @@
 			populateBlogPage(blog);
 		});
 	</script>
+	   {% include 'elements/needHelp.twig' %}
+	   {% include 'elements/footer.html.twig' %}
 {% endblock %}
 
