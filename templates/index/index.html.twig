@@ -4,44 +4,58 @@
 
 {% block body %}
 <script>
-	const blogs = {{ blogs|json_encode|raw }};
-    
-	function filterBlogs(category) {
-	    const blogContent = document.getElementById('blog-content');
-    
-	    const filteredBlogs = category === 'all'
-		? blogs
-		: blogs.filter(blog => blog.category === category);
-    
-	    blogContent.innerHTML = '';
-    
-	    filteredBlogs.forEach(blog => {
-		const blogElement = document.createElement('div');
-		blogElement.classList.add('blog-post');
-		
-		blogElement.onclick = () => {
-		    window.location.href = `/blog/${blog.id}`;
-		};
-    
-		blogElement.innerHTML = `
-		<img class="img-blog" src="${blog.image}" alt="${blog.title}"/>
-		<div class="body-blog">
-		<span class="blog-category">${blog.categoryid}</span>
-		    <h2 class="blog-title">${blog.title}</h2>
-		    <span class="blog-created>${blog.created}</span>
-			</div>
-		`;
-		blogContent.appendChild(blogElement);
-	    });
-	}
-    
-	document.addEventListener('DOMContentLoaded', () => {
-	    filterBlogs('all');
-	});
+    const blogs = {{ blogs|json_encode|raw }};
+    let currentIndex = 0;
+    const itemsPerPage = 10;
+    let currentCategory = 'all'; // Track the current category
 
+    function filterBlogs(category, reset = true) {
+        const blogContent = document.getElementById('blog-content');
+        
+        if (reset) {
+            currentIndex = 0;
+            blogContent.innerHTML = '';
+            currentCategory = category; // Update the current category
+        }
 
+        // Filter blogs based on the selected category
+        const filteredBlogs = currentCategory === 'all'
+            ? blogs
+            : blogs.filter(blog => blog.categoryid === currentCategory);
 
+        const nextBlogs = filteredBlogs.slice(currentIndex, currentIndex + itemsPerPage);
+        currentIndex += itemsPerPage;
 
+        nextBlogs.forEach(blog => {
+            const blogElement = document.createElement('div');
+            blogElement.classList.add('blog-post');
+            
+            blogElement.onclick = () => {
+                window.location.href = `/blog/${blog.id}`;
+            };
+
+            blogElement.innerHTML = `
+                <img class="img-blog" src="${blog.image}" alt="${blog.title}"/>
+                <div class="body-blog">
+                    <span class="blog-category">${blog.categoryid}</span>
+                    <h2 class="blog-title">${blog.title}</h2>
+                    <span class="blog-created">${blog.created}</span>
+                </div>
+            `;
+            blogContent.appendChild(blogElement);
+        });
+
+        const showMoreButton = document.getElementById('show-more-button');
+        if (currentIndex >= filteredBlogs.length) {
+            showMoreButton.style.display = 'none';
+        } else {
+            showMoreButton.style.display = 'block';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        filterBlogs('all');
+    });
 </script>
 
 <div class="container">
@@ -50,19 +64,17 @@
     </header>
 
     <div class="button-container"> 
-        <button onclick="filterBlogs('all')">All</button>
-        <button onclick="filterBlogs('1')">Category 1</button>
-        <button onclick="filterBlogs('2')">Category 2</button>
-        <button onclick="filterBlogs('3')">Category 3</button>
-        <button onclick="filterBlogs('4')">Category 4</button>
+        <button onclick="filterBlogs('all', true)">All</button>
+        <button onclick="filterBlogs('politics', true)">politics</button>
+        <button onclick="filterBlogs('sports', true)">sports</button>
+        <button onclick="filterBlogs('Technology', true)">Technology</button>
+        <button onclick="filterBlogs('Business', true)">Business</button>
     </div>
 
     <main>
-        <div id="blog-content">
-        </div>
+        <div id="blog-content"></div>
+        <button id="show-more-button" class="show-more-button mt-5" style="display: none;" onclick="filterBlogs(currentCategory, false)">Show More</button>
     </main>
-
-
 </div>
 
 {% endblock %}
