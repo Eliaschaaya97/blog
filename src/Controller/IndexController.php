@@ -23,22 +23,11 @@ class IndexController extends AbstractController
 	#[Route('/', name: 'app_index')]
 	public function index(): Response
 	{
-		// $blogs = [
-		// 	['id' => 1, 'title' => 'Blog Post 1', 'img' => '/build/images/test.jpg', 'date' => '26 July 2024', 'content' => 'Content for blog post 1', 'category' => 'category1'],
-		// 	['title' => 'Blog Post 2', 'content' => 'Content for blog post 2', 'category' => 'category2'],
-		// 	['title' => 'Blog Post 3', 'content' => 'Content for blog post 2', 'category' => 'category3'],
-		// 	['title' => 'Blog Post 4', 'content' => 'Content for blog post 2', 'category' => 'category4'],
-		// 	['title' => 'Blog Post 4', 'content' => 'Content for blog post 2', 'category' => 'category4'],
-		// 	['title' => 'Blog Post 4', 'content' => 'Content for blog post 2', 'category' => 'category4'],
-		// 	['title' => 'Blog Post 4', 'content' => 'Content for blog post 2', 'category' => 'category4'],
-		// 	['title' => 'Blog Post 4', 'content' => 'Content for blog post 2', 'category' => 'category4'],
-		// 	['title' => 'Blog Post 4', 'content' => 'Content for blog post 2', 'category' => 'category4'],
-		// 	['title' => 'Blog Post 4', 'content' => 'Content for blog post 2', 'category' => 'category4'],
-		// 	['title' => 'Blog Post 4', 'content' => 'Content for blog post 2', 'category' => 'category4'],
-
-		// ];
 		$blogsRepository = $this->blogsEntityManager->getRepository(Blogs::class);
-		$blogs = $blogsRepository->findAll();
+		$queryBuilder = $blogsRepository->createQueryBuilder('b')
+			->orderBy('b.created', 'DESC');
+
+		$blogs = $queryBuilder->getQuery()->getResult();
 		$blogsData = array_map(function ($blog) {
 			$category = $this->blogsEntityManager->getRepository(Categories::class)->find($blog->getCategoryId());
 			$categoryName = $category ? $category->getName() : 'Unknown';

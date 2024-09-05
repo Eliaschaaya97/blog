@@ -49,14 +49,14 @@
                 window.location.href = `/blog/${blog.id}`;
             };
 
-            blogElement.innerHTML = `
-                <img class="img-blog" src="${blog.image}" alt="${blog.title}"/>
-                <div class="body-blog">
-                    <span class="blog-category">${blog.categoryid}</span>
-                    <h2 class="blog-title">${blog.title}</h2>
-                    <span class="blog-created">${blog.created}</span>
-                </div>
-            `;
+		blogElement.innerHTML = `
+		<img class="img-blog" src="https://cpanel.suyool.com${blog.image}" alt="${blog.title}"/>
+		<div class="body-blog">
+		<span class="blog-category">${blog.categoryid}</span>
+		    <h2 class="blog-title">${blog.title}</h2>
+		    <span class="blog-created>${blog.created}</span>
+			</div>
+		`;
             blogContent.appendChild(blogElement);
         });
 
@@ -80,11 +80,11 @@
     </header>
 
     <div class="button-container"> 
-        <button onclick="filterBlogs('all', true)">All</button>
-        <button onclick="filterBlogs('politics', true)">politics</button>
-        <button onclick="filterBlogs('sports', true)">sports</button>
-        <button onclick="filterBlogs('Technology', true)">Technology</button>
-        <button onclick="filterBlogs('Business', true)">Business</button>
+        <button onclick="filterBlogs('all')">All</button>
+        <button onclick="filterBlogs('Politics')">Politics</button>
+        <button onclick="filterBlogs('Sports')">Sports</button>
+        <button onclick="filterBlogs('3')">Category 3</button>
+        <button onclick="filterBlogs('4')">Category 4</button>
     </div>
     
 
