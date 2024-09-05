@@ -18,7 +18,7 @@
 		const blog = {{ blog|json_encode|raw }};
 
 		function populateBlogPage(blog) {
-			document.getElementById("blogtitle").style.backgroundImage = `url('${blog.image}')`;
+			document.getElementById("blogtitle").style.backgroundImage = `url('https://cpanel.suyool.com${blog.image}')`;
 
 			const blogcontentTitle = document.querySelector(".blogcontentTitle");
 			blogcontentTitle.innerHTML = `

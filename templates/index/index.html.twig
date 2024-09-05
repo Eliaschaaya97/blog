@@ -24,7 +24,7 @@
 		};
     
 		blogElement.innerHTML = `
-		<img class="img-blog" src="${blog.image}" alt="${blog.title}"/>
+		<img class="img-blog" src="https://cpanel.suyool.com${blog.image}" alt="${blog.title}"/>
 		<div class="body-blog">
 		<span class="blog-category">${blog.categoryid}</span>
 		    <h2 class="blog-title">${blog.title}</h2>
@@ -52,7 +52,7 @@
     <div class="button-container"> 
         <button onclick="filterBlogs('all')">All</button>
         <button onclick="filterBlogs('Politics')">Politics</button>
-        <button onclick="filterBlogs('2')">Category 2</button>
+        <button onclick="filterBlogs('Sports')">Sports</button>
         <button onclick="filterBlogs('3')">Category 3</button>
         <button onclick="filterBlogs('4')">Category 4</button>
     </div>
