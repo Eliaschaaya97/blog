@@ -72,27 +72,53 @@
         filterBlogs('all');
     });
 </script>
+<style>
+	.button-container {
+	    margin-top: 20px; /* Adjust this value as needed */
+	    text-align: center; /* Center the buttons horizontally */
+	}
+    
+	.button-container button {
+	    margin: 5px; /* Adds space between buttons */
+	    padding: 10px 20px; /* Adjust padding as needed */
+	    border: 1px solid #ccc; /* Optional: add border */
+	    border-radius: 5px; /* Optional: add rounded corners */
+	    background-color: #f0f0f0; /* Optional: add background color */
+	    cursor: pointer; /* Add pointer cursor on hover */
+	    transition: background-color 0.3s ease; /* Smooth background color transition */
+	}
+    
+	.button-container button.button-active {
+	    background-color: #007bff; /* Active button background color */
+	    color: white; /* Active button text color */
+	}
+    
+	.button-container button:hover {
+	    background-color: #ddd; /* Background color on hover */
+	}
+    </style>
+    
 
-
-<div class="container">
+    <div class="container">
     <header>
         <h1 class='suyoolheadertitle'>Suyool's Blog</h1>
     </header>
 
-    <div class="button-container"> 
-        <button onclick="filterBlogs('all')">All</button>
-        <button onclick="filterBlogs('Politics')">Politics</button>
-        <button onclick="filterBlogs('Sports')">Sports</button>
-        <button onclick="filterBlogs('3')">Category 3</button>
-        <button onclick="filterBlogs('4')">Category 4</button>
+    <div class="button-container">
+        {% if categories is not empty %}
+            <button onclick="filterBlogs('all')">All</button>
+            {% for category in categories %}
+                <button onclick="filterBlogs('{{ category.name }}')">{{ category.name }}</button>
+            {% endfor %}
+        {% endif %}
     </div>
-    
 
     <main>
         <div id="blog-content"></div>
         <button id="show-more-button" class="show-more-button mt-5" style="display: none;" onclick="filterBlogs(currentCategory, false)">Show More</button>
     </main>
 </div>
+
    {% include 'elements/needHelp.twig' %}
    {% include 'elements/footer.html.twig' %}
 {% endblock %}

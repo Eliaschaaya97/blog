@@ -43,8 +43,11 @@ class IndexController extends AbstractController
 				'adminid' => $blog->getAdminid(),
 			];
 		}, $blogs);
+
+		$categories = $this->blogsEntityManager->getRepository(Categories::class)->findAll();
 		return $this->render('index/index.html.twig', [
 			'blogs' => $blogsData,
+			"categories" => $categories,
 		]);
 	}
 
